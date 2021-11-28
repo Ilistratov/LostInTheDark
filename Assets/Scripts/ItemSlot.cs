@@ -12,6 +12,13 @@ public class ItemSlot : MonoBehaviour
         equippedItem = null;
     }
 
+    private void Update()
+    {
+        if (IsEquipped())
+        {
+            equippedItem.transform.position = transform.position;
+        }
+    }
     // Check if any item is equipped
     public bool IsEquipped()
     {
@@ -41,6 +48,17 @@ public class ItemSlot : MonoBehaviour
         {
             equippedItem = itemToEquip;
             equippedItem.SetActive(false);
+        }
+    }
+
+    public void UnequipItem()
+    {
+        if (IsEquipped())
+        {
+            GameObject unequippedItem = RemoveEquippedItem();
+            unequippedItem.GetComponent<SpriteRenderer>().enabled = true;
+            unequippedItem.transform.position = transform.position;
+            equippedItem = null;
         }
     }
 }
