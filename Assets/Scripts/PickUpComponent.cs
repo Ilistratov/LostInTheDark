@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpComponent : MonoBehaviour
+public class PickUpComponent : GenericInteraction
 {
     private bool collectAvailable;
     private Collider2D collidedBody;
@@ -14,10 +14,10 @@ public class PickUpComponent : MonoBehaviour
         collectAvailable = false;
     }
 
-    private void Update()
+    public override void Interact()
     {
         // Collecting item
-        if (Input.GetKeyDown(KeyCode.E) && collectAvailable)
+        if (collectAvailable)
         {
             ItemSlot item = collidedBody.gameObject.GetComponent<ItemSlot>();
             item.EquipItem(gameObject);
@@ -44,5 +44,15 @@ public class PickUpComponent : MonoBehaviour
             collectAvailable = false;
             collidedBody = null;
         }
+    }
+
+    public override bool IsProvideRequired()
+    {
+        return collectAvailable;
+    }
+
+    public override bool IsRevokeRequired()
+    {
+        return !collectAvailable;
     }
 }

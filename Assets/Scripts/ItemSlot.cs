@@ -33,9 +33,9 @@ public class ItemSlot : MonoBehaviour
         {
             GameObject removedItem = RemoveEquippedItem();
             equippedItem = itemToEquip;
-            removedItem.SetActive(true);
+            removedItem.GetComponent<SpriteRenderer>().enabled = true;
             removedItem.transform.position = itemToEquip.transform.position;
-            itemToEquip.SetActive(false);
+            itemToEquip.GetComponent<SpriteRenderer>().enabled = false;
         }
         else
         {
