@@ -17,11 +17,8 @@ public class PickUpComponent : GenericInteraction
     public override void Interact()
     {
         // Collecting item
-        if (collectAvailable)
-        {
-            ItemSlot item = collidedBody.gameObject.GetComponent<ItemSlot>();
-            item.EquipItem(gameObject);
-        }
+        ItemSlot item = collidedBody.gameObject.GetComponent<ItemSlot>();
+        item.EquipItem(gameObject);
     }
 
     // Beginning of collision
