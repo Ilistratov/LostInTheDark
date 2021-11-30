@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,17 +11,23 @@ public class PlayerInteractor : MonoBehaviour
 
     public void PerfomSelectedInteraction() {
         if (mSelectedInteractionIndex < mAvailableInteractions.Count) {
-            mAvailableInteractions.GetByIndex(mSelectedInteractionIndex);
+            GenericInteraction selectedInteraction =
+                mAvailableInteractions.GetByIndex(mSelectedInteractionIndex) as GenericInteraction;
+            if (selectedInteraction == null) {
+                throw new InvalidOperationException(
+                    "selectedInteraction wasn't a valid GenericInteraction");
+            }
+            selectedInteraction.Interact();
         }
     }
-    
+   
     public void SelectNextInteraction() {
         mSelectedInteractionIndex += 1;
-        if (mSelectedInteractionIndex == mAvailableInteractions.Count) {
+        if (mSelectedInteractionIndex >= mAvailableInteractions.Count) {
             mSelectedInteractionIndex = 0;
         }
     }
-    
+   
     public int RegisterInteraction(GenericInteraction interaction) {
         mAvailableInteractions.Add(mNextRegistrationToken, interaction);
         mNextRegistrationToken += 1;
