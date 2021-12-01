@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickUpComponent : GenericInteraction
 {
+    public string mItemName = "Unnamed item";
     private bool collectAvailable;
     private Collider2D collidedBody;
 
@@ -14,7 +15,11 @@ public class PickUpComponent : GenericInteraction
         collectAvailable = false;
     }
 
-    public override void Interact()
+	public override string GetInteractionUIString()
+	{
+        return string.Format("Pick up {0}", mItemName);
+	}
+	public override void Interact()
     {
         // Collecting item
         ItemSlot item = collidedBody.gameObject.GetComponent<ItemSlot>();

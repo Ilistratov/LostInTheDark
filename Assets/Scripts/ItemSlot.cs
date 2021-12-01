@@ -50,7 +50,6 @@ public class ItemSlot : MonoBehaviour
             ChangeExistence(removedItem, true);
             removedItem.transform.position = itemToEquip.transform.position;
             ChangeExistence(itemToEquip, false);
-
         }
         else
         {
