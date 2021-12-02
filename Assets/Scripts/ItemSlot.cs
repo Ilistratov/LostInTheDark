@@ -22,7 +22,7 @@ public class ItemSlot : MonoBehaviour
     // Check if any item is equipped
     public bool IsEquipped()
     {
-        return equippedItem is not null;
+        return equippedItem != null;
     }
 
     // Remove equipped item and return it (return null if none is equipped)
