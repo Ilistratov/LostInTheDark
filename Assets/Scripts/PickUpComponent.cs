@@ -15,11 +15,11 @@ public class PickUpComponent : GenericInteraction
         collectAvailable = false;
     }
 
-	public override string GetInteractionUIString()
-	{
+    public override string GetInteractionUIString()
+    {
         return string.Format("Pick up {0}", mItemName);
-	}
-	public override void Interact()
+    }
+    public override void Interact()
     {
         // Collecting item
         ItemSlot item = collidedBody.gameObject.GetComponent<ItemSlot>();

@@ -25,10 +25,12 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = new Vector2(horizontalInput, verticalInput);
         transform.Translate(direction * speed * Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
             mPlayerInteractor.PerfomSelectedInteraction();
         }
-        if (Input.GetKeyDown(KeyCode.Q)) {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
             mPlayerInteractor.SelectNextInteraction();
         }
     }
