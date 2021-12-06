@@ -6,11 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     // Set the Player's speed
     private float speed = 1.5f;
+    private PlayerInteractor mPlayerInteractor;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mPlayerInteractor = GetComponent<PlayerInteractor>();
     }
 
     // Update is called once per frame
@@ -23,5 +24,14 @@ public class PlayerController : MonoBehaviour
         // Move player to a certain direction
         Vector2 direction = new Vector2(horizontalInput, verticalInput);
         transform.Translate(direction * speed * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            mPlayerInteractor.PerfomSelectedInteraction();
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            mPlayerInteractor.SelectNextInteraction();
+        }
     }
 }
