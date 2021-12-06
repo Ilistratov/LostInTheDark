@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class LightInteractor : MonoBehaviour
 {
-    public bool lighted;
-    private List<GameObject> collidedLights;
-    public int numberOfLights = 0;
+    public float lighted;
+    public List<GameObject> collidedLights;
+
     // Start is called before the first frame update
     void Start()
     {
-        lighted = false;
+        lighted = 0;
         collidedLights = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        lighted = false;
+        lighted = 0;
         if (collidedLights.Count != 0)
         {
             collidedLights.ForEach(CheckForLightRay);
@@ -27,7 +28,7 @@ public class LightInteractor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Light"))
+        if (collision.gameObject.GetComponent<Light2D>() != null)
         {
             collidedLights.Add(collision.gameObject);
         }
@@ -35,7 +36,7 @@ public class LightInteractor : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Light"))
+        if (collision.gameObject.GetComponent<Light2D>() != null)
         {
             collidedLights.Remove(collision.gameObject);
         }
@@ -49,12 +50,12 @@ public class LightInteractor : MonoBehaviour
         ContactFilter2D filter = new ContactFilter2D();
         filter.NoFilter();
         int numberOfHits = Physics2D.Raycast(transform.position, direction, filter, allObjectsBetween, distance);
-        lighted = true;
+        lighted += 1/(distance * distance);
         for (int i = 0; i < numberOfHits; i++)
         {
-            if (allObjectsBetween[i].collider.gameObject.CompareTag("Wall"))
+            if (allObjectsBetween[i].collider.gameObject.GetComponent<ShadowCaster2D>() != null)
             {
-                lighted = false;
+                lighted = 0;
             }
         }
     }
