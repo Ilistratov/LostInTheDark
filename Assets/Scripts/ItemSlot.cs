@@ -32,7 +32,7 @@ public class ItemSlot : MonoBehaviour
         equippedItem = null;
         return item;
     }
-    
+
     private void ChangeExistence(GameObject item, bool state)
     {
         item.GetComponent<SpriteRenderer>().enabled = state;
@@ -50,7 +50,6 @@ public class ItemSlot : MonoBehaviour
             ChangeExistence(removedItem, true);
             removedItem.transform.position = itemToEquip.transform.position;
             ChangeExistence(itemToEquip, false);
-
         }
         else
         {
