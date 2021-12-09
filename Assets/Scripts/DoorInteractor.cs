@@ -10,8 +10,8 @@ public class DoorInteractor : GenericInteraction
     private bool interaction_available = false;
     private Collider2D collided_body;
 
-    public override bool IsProvideRequired() { return interaction_available; }
-    public override bool IsRevokeRequired() { return !interaction_available; }
+    public override bool IsProvideRequired() { return interaction_available && is_open; }
+    public override bool IsRevokeRequired() { return !interaction_available || !is_open; }
     public override void Interact()
     {
         if (is_open)
@@ -23,6 +23,10 @@ public class DoorInteractor : GenericInteraction
         {
             Debug.Log("Attempted to go through closed door");
         }
+    }
+    public override string GetInteractionUIString()
+    {
+        return string.Format("Open the door");
     }
 
     // Collision with player start

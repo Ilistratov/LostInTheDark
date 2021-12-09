@@ -68,4 +68,8 @@ public class ItemSlot : MonoBehaviour
             equippedItem = null;
         }
     }
+    public GameObject GetEquippedItem()
+    {
+        return equippedItem;
+    }
 }
