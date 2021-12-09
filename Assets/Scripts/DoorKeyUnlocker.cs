@@ -12,20 +12,14 @@ public class DoorKeyUnlocker : GenericInteraction
     public override bool IsRevokeRequired() { return !interaction_available || linked_door.is_open; }
     public override void Interact()
     {
-        if (!linked_door.is_open)
+        var item_slot = collided_body.GetComponent<ItemSlot>();
+        if (item_slot.IsEquipped() && item_slot.GetEquippedItem().CompareTag(unlocker_tag))
         {
-            if (collided_body.GetComponent<ItemSlot>().IsEquipped() && collided_body.GetComponent<ItemSlot>().GetEquippedItem().CompareTag(unlocker_tag))
-            {
-                linked_door.is_open = true;
-            }
-            else
-            {
-                Debug.Log("Couldn't find a key in your Item Slot"); // TODO move this to the message box
-            }
+            linked_door.is_open = true;
         }
         else
         {
-            Debug.Log("Attempted to unlock open door");
+            Debug.Log("Couldn't find a key in your Item Slot"); // TODO move this to the message box
         }
     }
     public override string GetInteractionUIString()
@@ -43,7 +37,6 @@ public class DoorKeyUnlocker : GenericInteraction
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Key approached the door");
             interaction_available = true;
             collided_body = collision;
         }
@@ -54,7 +47,6 @@ public class DoorKeyUnlocker : GenericInteraction
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Key left the door");
             interaction_available = false;
             collided_body = null;
         }
