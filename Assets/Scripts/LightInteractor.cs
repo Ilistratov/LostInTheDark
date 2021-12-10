@@ -51,16 +51,19 @@ public class LightInteractor : MonoBehaviour
         filter.NoFilter();
         int numberOfHits = Physics2D.Raycast(transform.position, direction, filter, allObjectsBetween, distance);
         float localDistance = 1 / (distance * distance);
-        lightLevel += 1/(distance * distance);
         for (int i = 0; i < numberOfHits; i++)
         {
             if (allObjectsBetween[i].collider.gameObject.GetComponent<ShadowCaster2D>() != null)
             {
+                Debug.Log(allObjectsBetween[i].collider.gameObject + "returned");
                 return;
             }
+            Debug.Log(allObjectsBetween[i].collider.gameObject + " skipped");
         }
-        //lightLevel += 1 / (distance * distance);
+        ;
         float rad = source.GetComponent<CircleCollider2D>().radius;
         lightLevel += 1 - (distance * distance) / (rad * rad);
+        lightLevel = Mathf.Min(1, lightLevel);
+        lightLevel = Mathf.Max(0, lightLevel);
     }
 }
