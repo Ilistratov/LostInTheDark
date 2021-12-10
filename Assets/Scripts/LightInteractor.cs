@@ -55,10 +55,10 @@ public class LightInteractor : MonoBehaviour
         {
             if (allObjectsBetween[i].collider.gameObject.GetComponent<ShadowCaster2D>() != null)
             {
-                Debug.Log(allObjectsBetween[i].collider.gameObject + "returned");
+                //Debug.Log(allObjectsBetween[i].collider.gameObject + "returned");
                 return;
             }
-            Debug.Log(allObjectsBetween[i].collider.gameObject + " skipped");
+            //Debug.Log(allObjectsBetween[i].collider.gameObject + " skipped");
         }
         ;
         float rad = source.GetComponent<CircleCollider2D>().radius;
