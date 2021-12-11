@@ -35,10 +35,9 @@ public class ItemSlot : MonoBehaviour
 
     private void ChangeExistence(GameObject item, bool state)
     {
-        item.GetComponent<SpriteRenderer>().enabled = state;
+        item.GetComponentInChildren<SpriteRenderer>().enabled = state;
         item.GetComponent<BoxCollider2D>().enabled = state;
     }
-
 
     // Equip the given item, return the equipped one (return null if none is equipped)
     public void EquipItem(GameObject itemToEquip)

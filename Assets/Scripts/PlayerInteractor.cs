@@ -9,38 +9,59 @@ public class PlayerInteractor : MonoBehaviour
     private SortedList mAvailableInteractions;
     private int mNextRegistrationToken;
     private int mSelectedInteractionIndex;
-    private UnityEngine.UI.Text mInteractionDisplay;
+
+    GenericInteraction GetSelectedInteraction()
+    {
+        if (mSelectedInteractionIndex >= mAvailableInteractions.Count)
+        {
+            return null;
+        }
+        var listObject = mAvailableInteractions.GetByIndex(mSelectedInteractionIndex);
+        GenericInteraction interaction = listObject as GenericInteraction;
+        if (!interaction)
+        {
+            throw new InvalidOperationException(
+                    "selectedInteraction wasn't a valid GenericInteraction");
+        }
+        return interaction;
+    }
 
     public void PerfomSelectedInteraction()
     {
-        if (mSelectedInteractionIndex < mAvailableInteractions.Count)
-        {
-            GenericInteraction selectedInteraction =
-                mAvailableInteractions.GetByIndex(mSelectedInteractionIndex) as GenericInteraction;
-            if (selectedInteraction == null)
-            {
-                throw new InvalidOperationException(
-                    "selectedInteraction wasn't a valid GenericInteraction");
-            }
-            selectedInteraction.Interact();
+        GenericInteraction interaction = GetSelectedInteraction();
+        if (interaction)
+		{
+            interaction.Interact();
         }
     }
 
     public void SelectNextInteraction()
     {
+        GenericInteraction oldInteraction = GetSelectedInteraction();
+        if (oldInteraction)
+		{
+            oldInteraction.OnDeselected();
+		}
         mSelectedInteractionIndex += 1;
         if (mSelectedInteractionIndex >= mAvailableInteractions.Count)
         {
             mSelectedInteractionIndex = 0;
         }
-        UpdateUIString();
+        GenericInteraction newInteraction = GetSelectedInteraction();
+        if (newInteraction)
+		{
+            newInteraction.OnSelected();
+		}
     }
 
     public int RegisterInteraction(GenericInteraction interaction)
     {
         mAvailableInteractions.Add(mNextRegistrationToken, interaction);
         mNextRegistrationToken += 1;
-        UpdateUIString();
+        if (mAvailableInteractions.Count == 1)
+		{
+            GetSelectedInteraction().OnSelected();
+		}
         return mNextRegistrationToken - 1;
     }
 
@@ -48,44 +69,16 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (mSelectedInteractionIndex + 1 == mAvailableInteractions.Count)
         {
+            GetSelectedInteraction().OnDeselected();
             mSelectedInteractionIndex = 0;
         }
         mAvailableInteractions.Remove(interactionToken);
-        UpdateUIString();
     }
 
-    void UpdateUIString()
-    {
-        StringBuilder sb = new StringBuilder(50 * mAvailableInteractions.Count);
-        for (int i = 0; i < mAvailableInteractions.Count; i++)
-        {
-            GenericInteraction interaction = mAvailableInteractions.GetByIndex(i) as GenericInteraction;
-            string interactionUIString = interaction.GetInteractionUIString();
-            if (i == mSelectedInteractionIndex)
-            {
-                sb.Append(String.Format(" - {0} <- [E]\n", interactionUIString));
-            }
-            else
-            {
-                sb.Append(String.Format(" - {0}\n", interactionUIString));
-            }
-        }
-        mInteractionDisplay.text = sb.ToString();
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         mAvailableInteractions = new SortedList();
         mNextRegistrationToken = 1;
         mSelectedInteractionIndex = 0;
-        mInteractionDisplay = GameObject.FindGameObjectWithTag(
-            "Interaction Display").GetComponent<UnityEngine.UI.Text>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
