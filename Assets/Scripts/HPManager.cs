@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class HPManager : MonoBehaviour
 {
+    public int madnessDrainSpeed;
     private float madness;
     private GameObject hpDisplayer;
     private TextMeshProUGUI textMesh;
@@ -22,9 +23,8 @@ public class HPManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        madness += (0.1f - lightInfo.lightLevel) * 100 * Time.deltaTime;
-        madness = Mathf.Min(100, madness);
-        madness = Mathf.Max(0, madness);
+        madness += (0.1f - lightInfo.lightLevel) * madnessDrainSpeed * Time.deltaTime;
+        madness = Mathf.Clamp(madness, 0, 100);
         textMesh.text = "Madness: " + (int)madness;
         if (madness == 100)
         {
