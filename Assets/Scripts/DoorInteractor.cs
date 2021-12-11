@@ -16,6 +16,7 @@ public class DoorInteractor : GenericInteraction
     {
         if (is_open)
         {
+            gameObject.SendMessage("OnEnter", SendMessageOptions.DontRequireReceiver);
             collided_body.transform.SetPositionAndRotation(
                 other_side.transform.position + other_side.entry_position_shift, collided_body.transform.rotation);
         }
@@ -24,6 +25,7 @@ public class DoorInteractor : GenericInteraction
             Debug.Log("Attempted to go through closed door");
         }
     }
+
     public override string GetInteractionUIString()
     {
         return string.Format("Open the door");
