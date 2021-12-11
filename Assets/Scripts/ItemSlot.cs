@@ -35,7 +35,7 @@ public class ItemSlot : MonoBehaviour
 
     private void ChangeExistence(GameObject item, bool state)
     {
-        //item.GetComponent<SpriteRenderer>().enabled = state;
+        item.GetComponentInChildren<SpriteRenderer>().enabled = state;
         item.GetComponent<BoxCollider2D>().enabled = state;
     }
 
