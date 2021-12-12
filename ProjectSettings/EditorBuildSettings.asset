@@ -10,7 +10,10 @@ EditorBuildSettings:
     guid: e0415186f37f4ac4a95261290f00c7e6
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
-    guid: b785c8923827aa14284ee326b7114ac8
+    guid: 4964ec062161d7344a1f7517c7d623a0
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/GameLoss.unity
     guid: 6b8b13240f2f9d4448d94615f8284336

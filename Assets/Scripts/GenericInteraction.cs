@@ -5,6 +5,8 @@ using UnityEngine;
 public class GenericInteraction : MonoBehaviour
 {
     private int mInteractionToken = 0;
+    private GameObject interactionPointer;
+    private InteractionPointerController interactionPointerController;
     private bool IsProvided()
     {
         return mInteractionToken != 0;
@@ -18,29 +20,35 @@ public class GenericInteraction : MonoBehaviour
         TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
         tooltipController.SetText(System.String.Format("[E] - {0}", GetInteractionUIString()));
         tooltipController.Show();
-        InteractionPointerController pointerController =
-            GameObject.FindGameObjectWithTag("Interaction Pointer").GetComponent<InteractionPointerController>();
-        pointerController.Folow(this.gameObject);
+        interactionPointerController.SetActive();
     }
     public virtual void OnDeselected() {
         GameObject tooltip = GameObject.FindGameObjectWithTag("Interaction Display");
         TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
         tooltipController.Hide();
         tooltipController.SetText("");
-        InteractionPointerController pointerController =
-            GameObject.FindGameObjectWithTag("Interaction Pointer").GetComponent<InteractionPointerController>();
-        pointerController.Folow(null);
+        interactionPointerController.SetInactive();
     }
 
-    public void Update()
+	public virtual void Start()
+	{
+        interactionPointer = GameObject.Instantiate(GameObject.FindGameObjectWithTag("Interaction Pointer"));
+        interactionPointer.tag = "Untagged";
+        interactionPointer.transform.SetParent(gameObject.transform, false);
+        interactionPointerController = interactionPointer.GetComponent<InteractionPointerController>();
+    }
+
+	public virtual void Update()
     {
         if (!IsProvided() && IsProvideRequired())
         {
             var interactor = UnityEngine.GameObject.FindObjectOfType<PlayerInteractor>();
             mInteractionToken = interactor.RegisterInteraction(this);
+            interactionPointerController.Show();
         }
         else if (IsProvided() && IsRevokeRequired())
         {
+            interactionPointerController.Hide();
             var interactor = UnityEngine.GameObject.FindObjectOfType<PlayerInteractor>();
             interactor.UnregisterInteraction(mInteractionToken);
             mInteractionToken = 0;

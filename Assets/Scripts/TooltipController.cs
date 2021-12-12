@@ -29,9 +29,10 @@ public class TooltipController : MonoBehaviour
 	{
         text.text = tooltipText;
         Vector2 backgroundSize = new Vector2(
-            text.preferredWidth + 2 * textPaddingSize, text.preferredHeight + 2 * textPaddingSize);
+            text.preferredWidth + 2 * textPaddingSize, 30);
+        //GetComponent<RectTransform>().sizeDelta = backgroundSize;
         background.rectTransform.sizeDelta = backgroundSize;
-        GetComponent<RectTransform>().sizeDelta = backgroundSize;
+        text.rectTransform.sizeDelta = backgroundSize;
 	}
 
     // Start is called before the first frame update

@@ -67,12 +67,25 @@ public class PlayerInteractor : MonoBehaviour
 
     public void UnregisterInteraction(int interactionToken)
     {
-        if (mSelectedInteractionIndex + 1 == mAvailableInteractions.Count)
-        {
+        int removedInteractionIndex = mAvailableInteractions.GetKeyList().IndexOf(interactionToken);
+        if (removedInteractionIndex <= mSelectedInteractionIndex)
+		{
             GetSelectedInteraction().OnDeselected();
-            mSelectedInteractionIndex = 0;
-        }
+		}
         mAvailableInteractions.Remove(interactionToken);
+        if (removedInteractionIndex <= mSelectedInteractionIndex)
+        {
+            --mSelectedInteractionIndex;
+            if (mSelectedInteractionIndex < 0)
+			{
+                mSelectedInteractionIndex = 0;
+			}
+            GenericInteraction selectedInteraction = GetSelectedInteraction();
+            if (selectedInteraction)
+			{
+                selectedInteraction.OnSelected();
+			}
+        }
     }
 
     void Start()

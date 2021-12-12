@@ -30,8 +30,9 @@ public class DoorKeyUnlocker : GenericInteraction
         return string.Format("Unlock the door");
     }
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         linked_door = gameObject.GetComponent<DoorInteractor>();
     }
 

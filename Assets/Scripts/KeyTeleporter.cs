@@ -16,7 +16,6 @@ public class KeyTeleporter : MonoBehaviour
 
     void Teleport()
 	{
-        GetComponentInChildren<SpriteRenderer>().enabled = false;
         if (teleportDestinations.Count > 0)
 		{
             Random.InitState(System.DateTime.Now.Millisecond);
@@ -39,10 +38,6 @@ public class KeyTeleporter : MonoBehaviour
 		{
             needToTeleport = lightInteractor.lightLevel >= lightLevelToTeleport;
             needToCheckPosition = false;
-            if (!needToTeleport)
-			{
-                GetComponentInChildren<SpriteRenderer>().enabled = true;
-            }
 		}
         else
 		{

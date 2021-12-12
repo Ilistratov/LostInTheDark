@@ -5,34 +5,38 @@ using UnityEngine;
 public class InteractionPointerController : MonoBehaviour
 {
     SpriteRenderer pointerSprite;
-    GameObject objectToFolow;
     public Vector2 offset;
+    public Color activeColor;
+    public Color inactiveColor;
 
-    void UpdatePosition()
-    {
-        if (objectToFolow)
-        {
-            transform.position = objectToFolow.transform.position;
-            transform.Translate(offset.x, offset.y, 0.0f);
-        }
-    }
+    public void SetActive()
+	{
+        pointerSprite.color = activeColor;
+        pointerSprite.sortingOrder = 2;
+	}
 
-    public void Folow(GameObject newObjectToFolow)
-    {
+    public void SetInactive()
+	{
+        pointerSprite.color = inactiveColor;
+        pointerSprite.sortingOrder = 1;
+	}
+
+    public void Hide()
+	{
         pointerSprite.enabled = false;
-        objectToFolow = newObjectToFolow;
-        UpdatePosition();
-        pointerSprite.enabled = newObjectToFolow != null;
-    }
+	}
+
+    public void Show()
+	{
+        pointerSprite.enabled = true;
+	}
 
     void Start()
     {
         pointerSprite = GetComponent<SpriteRenderer>();
-        Folow(null);
-    }
-
-    void Update()
-    {
-        UpdatePosition();
+        pointerSprite.color = inactiveColor;
+        transform.position.Set(offset.x, offset.y, 0);
+        SetInactive();
+        Hide();
     }
 }
