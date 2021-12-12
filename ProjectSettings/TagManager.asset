@@ -9,6 +9,7 @@ TagManager:
   - Interaction Pointer
   - key
   - Message Display
+  - Blue Key
   layers:
   - Default
   - TransparentFX
