@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511838891}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
   m_Name: 
@@ -1757,15 +1757,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1213142163}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce0a84ba7485bbb4e9c4534f36799e70, type: 3}
+  m_Script: {fileID: 11500000, guid: bd85b981dcccc864db72186d47631dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mInteractionToken: 0
-  interactionPointer: {fileID: 0}
-  interactionPointerController: {fileID: 0}
   mItemName: Unnamed item
-  collectAvailable: 0
-  collidedBody: {fileID: 0}
 --- !u!4 &1213142166
 Transform:
   m_ObjectHideFlags: 0
@@ -1774,7 +1769,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1213142163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.91, y: 4.11, z: 0}
+  m_LocalPosition: {x: 10.03, y: 4.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1471215881}
@@ -1863,11 +1858,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9218914868179410938, guid: 958bbc09eca1e9b4a9feccbde8fc5e52, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.86
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: 9218914868179410938, guid: 958bbc09eca1e9b4a9feccbde8fc5e52, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9218914868179410938, guid: 958bbc09eca1e9b4a9feccbde8fc5e52, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4669,9 +4664,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1793149898}
   - component: {fileID: 1793149901}
-  - component: {fileID: 1793149900}
   - component: {fileID: 1793149899}
   - component: {fileID: 1793149902}
+  - component: {fileID: 1793149900}
   m_Layer: 0
   m_Name: Door #1
   m_TagString: Untagged
@@ -4728,16 +4723,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1793149897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3306446964f47354981c0a137b9d27ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a2ae2dd22e9d7548a1580edfea6c8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mInteractionToken: 0
-  interactionPointer: {fileID: 0}
-  interactionPointerController: {fileID: 0}
   unlocker_tag: Test Key#1
-  interaction_available: 0
-  linked_door: {fileID: 0}
-  collided_body: {fileID: 0}
 --- !u!114 &1793149901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4874,11 +4863,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6769274870286233371, guid: 6f3dc0f01f33cab469e0fc472bdefea7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.51
+      value: -0.44
       objectReference: {fileID: 0}
     - target: {fileID: 6769274870286233371, guid: 6f3dc0f01f33cab469e0fc472bdefea7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 6769274870286233371, guid: 6f3dc0f01f33cab469e0fc472bdefea7, type: 3}
       propertyPath: m_LocalPosition.z
