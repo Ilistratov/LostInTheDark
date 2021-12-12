@@ -19,7 +19,7 @@ public class DoorKeyUnlocker : GenericInteraction
         }
         else
         {
-            Debug.Log("Couldn't find a key in your Item Slot"); // TODO move this to the message box
+            Debug.Log("Couldn't find a key in your Item Slot");
             ShowMessage("Couldn't find a key in your Item Slot");
             StartCoroutine("HideMessage");
             
@@ -63,7 +63,7 @@ public class DoorKeyUnlocker : GenericInteraction
     }
     private IEnumerator HideMessage()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5); // waiting for 5 sec and then hiding the message
         GameObject tooltip = GameObject.FindGameObjectWithTag("Message Display");
         TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
         tooltipController.Hide();
