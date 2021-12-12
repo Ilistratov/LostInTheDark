@@ -30,7 +30,7 @@ public class PlayerInteractor : MonoBehaviour
     {
         GenericInteraction interaction = GetSelectedInteraction();
         if (interaction)
-		{
+        {
             interaction.Interact();
         }
     }
@@ -39,9 +39,9 @@ public class PlayerInteractor : MonoBehaviour
     {
         GenericInteraction oldInteraction = GetSelectedInteraction();
         if (oldInteraction)
-		{
+        {
             oldInteraction.OnDeselected();
-		}
+        }
         mSelectedInteractionIndex += 1;
         if (mSelectedInteractionIndex >= mAvailableInteractions.Count)
         {
@@ -49,9 +49,9 @@ public class PlayerInteractor : MonoBehaviour
         }
         GenericInteraction newInteraction = GetSelectedInteraction();
         if (newInteraction)
-		{
+        {
             newInteraction.OnSelected();
-		}
+        }
     }
 
     public int RegisterInteraction(GenericInteraction interaction)
@@ -59,20 +59,33 @@ public class PlayerInteractor : MonoBehaviour
         mAvailableInteractions.Add(mNextRegistrationToken, interaction);
         mNextRegistrationToken += 1;
         if (mAvailableInteractions.Count == 1)
-		{
+        {
             GetSelectedInteraction().OnSelected();
-		}
+        }
         return mNextRegistrationToken - 1;
     }
 
     public void UnregisterInteraction(int interactionToken)
     {
-        if (mSelectedInteractionIndex + 1 == mAvailableInteractions.Count)
+        int removedInteractionIndex = mAvailableInteractions.GetKeyList().IndexOf(interactionToken);
+        if (removedInteractionIndex <= mSelectedInteractionIndex)
         {
             GetSelectedInteraction().OnDeselected();
-            mSelectedInteractionIndex = 0;
         }
         mAvailableInteractions.Remove(interactionToken);
+        if (removedInteractionIndex <= mSelectedInteractionIndex)
+        {
+            --mSelectedInteractionIndex;
+            if (mSelectedInteractionIndex < 0)
+            {
+                mSelectedInteractionIndex = 0;
+            }
+            GenericInteraction selectedInteraction = GetSelectedInteraction();
+            if (selectedInteraction)
+            {
+                selectedInteraction.OnSelected();
+            }
+        }
     }
 
     void Start()

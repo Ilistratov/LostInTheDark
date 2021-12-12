@@ -13,8 +13,9 @@ public class DropItemComponent : GenericInteraction
         return string.Format("Drop {0}", item_slot.GetEquippedItem().GetComponent<PickUpComponent>().mItemName);
     }
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         item_slot = gameObject.GetComponent<ItemSlot>();
     }
 }

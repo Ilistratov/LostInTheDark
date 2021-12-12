@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9218914868179410928}
   - component: {fileID: 6902197103164061229}
   - component: {fileID: 5661444654745432773}
+  - component: {fileID: 1717061528380706461}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -31,8 +32,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9218914868179410931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.47, y: -0.59, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9218914868662138160}
   - {fileID: 7395528433279733065}
@@ -120,7 +121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.6, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &6902197103164061229
 MonoBehaviour:
@@ -149,6 +150,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   madnessDrainSpeed: 0
+--- !u!114 &1717061528380706461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9218914868179410931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda74daa7867dee43be1cdec2b1a08ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9218914868662138163
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9218914868662138163}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.41205, y: 0.22999999, z: -100}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
   m_LocalScale: {x: 0.5193838, y: 0.5036168, z: 1}
   m_Children: []
   m_Father: {fileID: 9218914868179410938}
@@ -274,6 +287,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 9218914868179410938}
     m_Modifications:
     - target: {fileID: 118802896779338907, guid: 534e964ede77b5e418a12e846d4ea8a6, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 118802896779338907, guid: 534e964ede77b5e418a12e846d4ea8a6, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 118802896779338907, guid: 534e964ede77b5e418a12e846d4ea8a6, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 1df4cd771249fdd49be83667b299f717, type: 3}
@@ -287,11 +308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783381209054883010, guid: 534e964ede77b5e418a12e846d4ea8a6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.3997
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1783381209054883010, guid: 534e964ede77b5e418a12e846d4ea8a6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3997
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1783381209054883010, guid: 534e964ede77b5e418a12e846d4ea8a6, type: 3}
       propertyPath: m_LocalPosition.x

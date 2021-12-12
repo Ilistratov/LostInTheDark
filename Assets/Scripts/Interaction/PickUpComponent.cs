@@ -9,8 +9,9 @@ public class PickUpComponent : GenericInteraction
     private Collider2D collidedBody;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         collidedBody = null;
         collectAvailable = false;
     }
