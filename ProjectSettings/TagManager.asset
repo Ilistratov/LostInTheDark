@@ -7,6 +7,8 @@ TagManager:
   - Interaction Display
   - Test Key#1
   - Interaction Pointer
+  - key
+  - Message Display
   layers:
   - Default
   - TransparentFX
