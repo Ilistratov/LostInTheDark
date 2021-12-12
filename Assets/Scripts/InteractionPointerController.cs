@@ -10,26 +10,26 @@ public class InteractionPointerController : MonoBehaviour
     public Color inactiveColor;
 
     public void SetActive()
-	{
+    {
         pointerSprite.color = activeColor;
         pointerSprite.sortingOrder = 2;
-	}
+    }
 
     public void SetInactive()
-	{
+    {
         pointerSprite.color = inactiveColor;
         pointerSprite.sortingOrder = 1;
-	}
+    }
 
     public void Hide()
-	{
+    {
         pointerSprite.enabled = false;
-	}
+    }
 
     public void Show()
-	{
+    {
         pointerSprite.enabled = true;
-	}
+    }
 
     void Start()
     {

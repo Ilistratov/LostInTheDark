@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput < 0)
         {
             gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
-        } else
+        }
+        else if (horizontalInput > 0)
         {
             gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
         }

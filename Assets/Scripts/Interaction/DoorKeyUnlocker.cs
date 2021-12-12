@@ -22,7 +22,7 @@ public class DoorKeyUnlocker : GenericInteraction
             Debug.Log("Couldn't find a key in your Item Slot");
             ShowMessage("Couldn't find a key in your Item Slot");
             StartCoroutine("HideMessage");
-            
+
         }
     }
     public override string GetInteractionUIString()

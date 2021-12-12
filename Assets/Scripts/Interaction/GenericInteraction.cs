@@ -15,14 +15,16 @@ public class GenericInteraction : MonoBehaviour
     public virtual bool IsRevokeRequired() { return false; } // Default implementation
     public virtual void Interact() { return; } // Default implementation
     public virtual string GetInteractionUIString() { return "Unnamed interaction"; }
-    public virtual void OnSelected() {
+    public virtual void OnSelected()
+    {
         GameObject tooltip = GameObject.FindGameObjectWithTag("Interaction Display");
         TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
         tooltipController.SetText(System.String.Format("[E] - {0}", GetInteractionUIString()));
         tooltipController.Show();
         interactionPointerController.SetActive();
     }
-    public virtual void OnDeselected() {
+    public virtual void OnDeselected()
+    {
         GameObject tooltip = GameObject.FindGameObjectWithTag("Interaction Display");
         TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
         tooltipController.Hide();
@@ -30,15 +32,15 @@ public class GenericInteraction : MonoBehaviour
         interactionPointerController.SetInactive();
     }
 
-	public virtual void Start()
-	{
+    public virtual void Start()
+    {
         interactionPointer = GameObject.Instantiate(GameObject.FindGameObjectWithTag("Interaction Pointer"));
         interactionPointer.tag = "Untagged";
         interactionPointer.transform.SetParent(gameObject.transform, false);
         interactionPointerController = interactionPointer.GetComponent<InteractionPointerController>();
     }
 
-	public virtual void Update()
+    public virtual void Update()
     {
         if (!IsProvided() && IsProvideRequired())
         {
