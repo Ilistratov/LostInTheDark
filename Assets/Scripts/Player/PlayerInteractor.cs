@@ -9,6 +9,8 @@ public class PlayerInteractor : MonoBehaviour
     private SortedList mAvailableInteractions;
     private int mNextRegistrationToken;
     private int mSelectedInteractionIndex;
+    private GameObject interactionHint;
+    private GameObject switchHint;
 
     GenericInteraction GetSelectedInteraction()
     {
@@ -54,6 +56,13 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
+    void UpdateHintState()
+	{
+        interactionHint.GetComponent<UnityEngine.UI.Text>().enabled = mAvailableInteractions.Count > 0;
+        switchHint.GetComponent<UnityEngine.UI.Text>().enabled = mAvailableInteractions.Count > 1;
+
+    }
+
     public int RegisterInteraction(GenericInteraction interaction)
     {
         mAvailableInteractions.Add(mNextRegistrationToken, interaction);
@@ -62,6 +71,7 @@ public class PlayerInteractor : MonoBehaviour
         {
             GetSelectedInteraction().OnSelected();
         }
+        UpdateHintState();
         return mNextRegistrationToken - 1;
     }
 
@@ -86,6 +96,7 @@ public class PlayerInteractor : MonoBehaviour
                 selectedInteraction.OnSelected();
             }
         }
+        UpdateHintState();
     }
 
     void Start()
@@ -93,5 +104,7 @@ public class PlayerInteractor : MonoBehaviour
         mAvailableInteractions = new SortedList();
         mNextRegistrationToken = 1;
         mSelectedInteractionIndex = 0;
+        interactionHint = GameObject.FindGameObjectWithTag("Interact Hint");
+        switchHint = GameObject.FindGameObjectWithTag("Switch Hint");
     }
 }

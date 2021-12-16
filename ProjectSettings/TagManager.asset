@@ -10,6 +10,9 @@ TagManager:
   - key
   - Message Display
   - Blue Key
+  - Interact Hint
+  - Switch Hint
+  - Item Slot Display
   layers:
   - Default
   - TransparentFX

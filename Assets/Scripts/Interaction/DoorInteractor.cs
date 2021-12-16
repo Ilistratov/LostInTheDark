@@ -10,8 +10,7 @@ public class DoorInteractor : GenericInteraction
     private bool interaction_available = false;
     private Collider2D collided_body;
 
-    public override bool IsProvideRequired() { return interaction_available && is_open; }
-    public override bool IsRevokeRequired() { return !interaction_available || !is_open; }
+    public override bool IsActionAvailable() { return interaction_available && is_open; }
     public override void Interact()
     {
         if (is_open)
@@ -26,9 +25,26 @@ public class DoorInteractor : GenericInteraction
         }
     }
 
-    public override string GetInteractionUIString()
+    public string GetCurrentRoomName()
+	{
+        return transform.parent.gameObject.name;
+	}
+
+    public string GetDestinationRoomName()
+	{
+        if (other_side)
+		{
+            return other_side.GetComponent<DoorInteractor>().GetCurrentRoomName();
+		}
+		else
+        {
+            return "???";
+        }
+	}
+
+    public override string GetUIString()
     {
-        return string.Format("Open the door");
+        return string.Format("Go to {0}", GetDestinationRoomName());
     }
 
     // Collision with player start

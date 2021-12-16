@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         {
             mPlayerInteractor.PerfomSelectedInteraction();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             mPlayerInteractor.SelectNextInteraction();
         }

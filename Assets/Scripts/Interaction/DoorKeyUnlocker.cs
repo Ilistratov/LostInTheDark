@@ -8,8 +8,7 @@ public class DoorKeyUnlocker : GenericInteraction
     private bool interaction_available = false;
     private DoorInteractor linked_door;
     private Collider2D collided_body;
-    public override bool IsProvideRequired() { return interaction_available && !linked_door.is_open; }
-    public override bool IsRevokeRequired() { return !interaction_available || linked_door.is_open; }
+    public override bool IsActionAvailable() { return interaction_available && !linked_door.is_open; }
     public override void Interact()
     {
         var item_slot = collided_body.GetComponent<ItemSlot>();
@@ -25,9 +24,9 @@ public class DoorKeyUnlocker : GenericInteraction
 
         }
     }
-    public override string GetInteractionUIString()
+    public override string GetUIString()
     {
-        return string.Format("Unlock the door");
+        return string.Format("Unlock door to {0}", linked_door.GetComponent<DoorInteractor>().GetDestinationRoomName());
     }
     // Start is called before the first frame update
     public override void Start()

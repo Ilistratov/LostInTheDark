@@ -5,11 +5,15 @@ using UnityEngine;
 public class ItemSlot : MonoBehaviour
 {
     private GameObject equippedItem;
+    private UnityEngine.UI.Image slotDisplayItemImage;
 
     // Start is called before the first frame update
     void Start()
     {
         equippedItem = null;
+        slotDisplayItemImage = GameObject.FindGameObjectWithTag("Item Slot Display")
+                                          .transform.Find("Item Image")
+                                          .gameObject.GetComponent<UnityEngine.UI.Image>();
     }
 
     private void Update()
@@ -30,12 +34,14 @@ public class ItemSlot : MonoBehaviour
     {
         GameObject item = equippedItem;
         equippedItem = null;
+        slotDisplayItemImage.enabled = false;
+        slotDisplayItemImage.sprite = null;
         return item;
     }
 
     private void ChangeExistence(GameObject item, bool state)
     {
-        item.GetComponentInChildren<SpriteRenderer>().enabled = state;
+        item.transform.Find("Sprite").gameObject.GetComponent<SpriteRenderer>().enabled = state;
         item.GetComponent<BoxCollider2D>().enabled = state;
     }
 
@@ -55,6 +61,11 @@ public class ItemSlot : MonoBehaviour
             equippedItem = itemToEquip;
             ChangeExistence(equippedItem, false);
         }
+        slotDisplayItemImage.sprite = equippedItem.transform.Find("Sprite")
+                                                  .gameObject
+                                                  .GetComponent<SpriteRenderer>()
+                                                  .sprite;
+        slotDisplayItemImage.enabled = true;
     }
 
     public void UnequipItem()
