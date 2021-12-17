@@ -18,36 +18,36 @@ public class SelectorController : MonoBehaviour
         OnHide();
     }
 
-	public void OnSelected(string uiString)
-	{
+    public void OnSelected(string uiString)
+    {
         selectorSprite.color = selectedColor;
         var text = hoverText.GetComponent<UnityEngine.UI.Text>();
         text.text = uiString;
         text.enabled = true;
         needUpdateTextPosition = true;
-	}
+    }
 
     public void OnDeselected()
-	{
+    {
         selectorSprite.color = deselectedColor;
         var text = hoverText.GetComponent<UnityEngine.UI.Text>();
         text.text = "";
         text.enabled = false;
         needUpdateTextPosition = false;
-	}
+    }
 
     public void OnShow()
-	{
+    {
         selectorSprite.enabled = true;
-	}
+    }
 
     public void OnHide()
-	{
+    {
         selectorSprite.enabled = false;
-	}
+    }
 
     void UpdateTextPosition()
-	{
+    {
         UnityEngine.UI.Text text = hoverText.GetComponent<UnityEngine.UI.Text>();
         Vector3 screenPosition = RectTransformUtility.WorldToScreenPoint(
             Camera.main, transform.Find("HoverTextPosition").transform.position);
@@ -60,7 +60,7 @@ public class SelectorController : MonoBehaviour
     void Update()
     {
         if (needUpdateTextPosition)
-		{
+        {
             UpdateTextPosition();
         }
     }

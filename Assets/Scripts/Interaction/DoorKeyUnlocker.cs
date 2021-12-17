@@ -21,7 +21,8 @@ public class DoorKeyUnlocker : GenericInteraction
             MessageBoxController.Message message = new MessageBoxController.Message(
                 string.Format("You need {0} to open that door", unlocker_tag),
                 3);
-            MessageBoxController controller = GameObject.FindGameObjectWithTag("Message Display").GetComponent<MessageBoxController>();
+            MessageBoxController controller = GameObject.FindGameObjectWithTag("Message Display")
+                                              .GetComponent<MessageBoxController>();
             controller.EnqueueMessage(message);
         }
     }

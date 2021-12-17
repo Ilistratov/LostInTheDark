@@ -19,28 +19,24 @@ public class DoorInteractor : GenericInteraction
             collided_body.transform.SetPositionAndRotation(
                 other_side.transform.position + other_side.entry_position_shift, collided_body.transform.rotation);
         }
-        else
-        {
-            Debug.Log("Attempted to go through closed door");
-        }
     }
 
     public string GetCurrentRoomName()
-	{
+    {
         return transform.parent.gameObject.name;
-	}
+    }
 
     public string GetDestinationRoomName()
-	{
+    {
         if (other_side)
-		{
+        {
             return other_side.GetComponent<DoorInteractor>().GetCurrentRoomName();
-		}
-		else
+        }
+        else
         {
             return "???";
         }
-	}
+    }
 
     public override string GetUIString()
     {
@@ -52,7 +48,6 @@ public class DoorInteractor : GenericInteraction
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player approached the door");
             interaction_available = true;
             collided_body = collision;
         }
@@ -63,10 +58,8 @@ public class DoorInteractor : GenericInteraction
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player left the door");
             interaction_available = false;
             collided_body = null;
         }
     }
-
 }
