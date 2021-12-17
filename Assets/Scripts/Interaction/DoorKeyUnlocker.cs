@@ -18,10 +18,11 @@ public class DoorKeyUnlocker : GenericInteraction
         }
         else
         {
-            Debug.Log("Couldn't find a key in your Item Slot");
-            ShowMessage("Couldn't find a key in your Item Slot");
-            StartCoroutine("HideMessage");
-
+            MessageBoxController.Message message = new MessageBoxController.Message(
+                string.Format("You need {0} to open that door", unlocker_tag),
+                3);
+            MessageBoxController controller = GameObject.FindGameObjectWithTag("Message Display").GetComponent<MessageBoxController>();
+            controller.EnqueueMessage(message);
         }
     }
     public override string GetUIString()
@@ -53,20 +54,5 @@ public class DoorKeyUnlocker : GenericInteraction
             interaction_available = false;
             collided_body = null;
         }
-    }
-    private void ShowMessage(string message)
-    {
-        GameObject tooltip = GameObject.FindGameObjectWithTag("Message Display");
-        TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
-        tooltipController.SetText(message);
-        tooltipController.Show();
-    }
-    private IEnumerator HideMessage()
-    {
-        yield return new WaitForSeconds(5); // waiting for 5 sec and then hiding the message
-        GameObject tooltip = GameObject.FindGameObjectWithTag("Message Display");
-        TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
-        tooltipController.Hide();
-        tooltipController.SetText("");
     }
 }
