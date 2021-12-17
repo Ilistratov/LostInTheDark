@@ -13,6 +13,7 @@ TagManager:
   - Interact Hint
   - Switch Hint
   - Item Slot Display
+  - Sanity Display
   layers:
   - Default
   - TransparentFX

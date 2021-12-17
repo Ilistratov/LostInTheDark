@@ -6,27 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class HPManager : MonoBehaviour
 {
-    public int madnessDrainSpeed;
-    private float madness;
-    private GameObject hpDisplayer;
-    private TextMeshProUGUI textMesh;
+    public float sanityChangeSpeed;
+    private float sanity;
+    private SanityDisplayController hpDisplayer;
     LightInteractor lightInfo;
     // Start is called before the first frame update
     void Start()
     {
-        madness = 0;
-        hpDisplayer = GameObject.Find("HPBar");
-        textMesh = hpDisplayer.GetComponent<TextMeshProUGUI>();
+        sanity = 1;
+        hpDisplayer = GameObject.FindGameObjectWithTag("Sanity Display").GetComponent<SanityDisplayController>();
         lightInfo = GetComponent<LightInteractor>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        madness += (0.1f - lightInfo.lightLevel) * madnessDrainSpeed * Time.deltaTime;
-        madness = Mathf.Clamp(madness, 0, 100);
-        textMesh.text = "Madness: " + (int)madness;
-        if (madness == 100)
+        float targetSanity = lightInfo.lightLevel;
+        float deltaSanity = targetSanity - sanity;
+        float speedMod = Mathf.Sign(deltaSanity);
+        if (Mathf.Abs(deltaSanity) < sanityChangeSpeed)
+		{
+            speedMod = 0;
+		}
+        if (Mathf.Abs(deltaSanity) > 0.3)
+		{
+            speedMod *= 2;
+		}
+        sanity += sanityChangeSpeed * speedMod;
+        hpDisplayer.SetValue(sanity);
+        if (sanity < 0.005)
         {
             SceneManager.LoadScene("GameLoss");
         }
