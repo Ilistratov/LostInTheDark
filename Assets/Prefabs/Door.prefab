@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fca1a177bc72784680af07dd3ea9116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectorDisplayPrefab: {fileID: 2609561880250630767, guid: 1b792514578c1354db02a3306ec7d7ab, type: 3}
   is_open: 0
   other_side: {fileID: 3879183183438301555}
   entry_position_shift: {x: 0, y: 0, z: 0}
@@ -86,4 +87,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2ae2dd22e9d7548a1580edfea6c8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectorDisplayPrefab: {fileID: 2609561880250630767, guid: 1b792514578c1354db02a3306ec7d7ab, type: 3}
   unlocker_tag: Test Key#1
