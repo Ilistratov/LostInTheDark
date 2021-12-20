@@ -5,55 +5,59 @@ using UnityEngine;
 public class GenericInteraction : MonoBehaviour
 {
     private int mInteractionToken = 0;
-    private GameObject interactionPointer;
-    private InteractionPointerController interactionPointerController;
+    public GameObject selectorDisplayPrefab;
+    private GameObject selectorDisplay;
+
     private bool IsProvided()
     {
         return mInteractionToken != 0;
     }
-    public virtual bool IsProvideRequired() { return false; } // Default implementation
-    public virtual bool IsRevokeRequired() { return false; } // Default implementation
+    public virtual bool IsActionAvailable() { return false; } // Default implementation
     public virtual void Interact() { return; } // Default implementation
-    public virtual string GetInteractionUIString() { return "Unnamed interaction"; }
+    public virtual string GetUIString() { return ""; }
     public virtual void OnSelected()
     {
-        GameObject tooltip = GameObject.FindGameObjectWithTag("Interaction Display");
-        TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
-        tooltipController.SetText(System.String.Format("[E] - {0}", GetInteractionUIString()));
-        tooltipController.Show();
-        interactionPointerController.SetActive();
+        if (selectorDisplay)
+        {
+            selectorDisplay.SendMessage("OnSelected", GetUIString(), SendMessageOptions.DontRequireReceiver);
+        }
     }
     public virtual void OnDeselected()
     {
-        GameObject tooltip = GameObject.FindGameObjectWithTag("Interaction Display");
-        TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
-        tooltipController.Hide();
-        tooltipController.SetText("");
-        interactionPointerController.SetInactive();
+        if (selectorDisplay)
+        {
+            selectorDisplay.SendMessage("OnDeselected", SendMessageOptions.DontRequireReceiver);
+        }
     }
 
     public virtual void Start()
     {
-        interactionPointer = GameObject.Instantiate(GameObject.FindGameObjectWithTag("Interaction Pointer"));
-        interactionPointer.tag = "Untagged";
-        interactionPointer.transform.SetParent(gameObject.transform, false);
-        interactionPointerController = interactionPointer.GetComponent<InteractionPointerController>();
+        if (selectorDisplayPrefab)
+        {
+            selectorDisplay = GameObject.Instantiate(selectorDisplayPrefab, gameObject.transform);
+        }
     }
 
     public virtual void Update()
     {
-        if (!IsProvided() && IsProvideRequired())
+        if (!IsProvided() && IsActionAvailable())
         {
             var interactor = UnityEngine.GameObject.FindObjectOfType<PlayerInteractor>();
             mInteractionToken = interactor.RegisterInteraction(this);
-            interactionPointerController.Show();
+            if (selectorDisplay)
+            {
+                selectorDisplay.SendMessage("OnShow", SendMessageOptions.DontRequireReceiver);
+            }
         }
-        else if (IsProvided() && IsRevokeRequired())
+        else if (IsProvided() && !IsActionAvailable())
         {
-            interactionPointerController.Hide();
             var interactor = UnityEngine.GameObject.FindObjectOfType<PlayerInteractor>();
             interactor.UnregisterInteraction(mInteractionToken);
             mInteractionToken = 0;
+            if (selectorDisplay)
+            {
+                selectorDisplay.SendMessage("OnHide", SendMessageOptions.DontRequireReceiver);
+            }
         }
     }
 }

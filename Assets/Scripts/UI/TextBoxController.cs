@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TooltipController : MonoBehaviour
+public class TextBoxController : MonoBehaviour
 {
     UnityEngine.UI.Text text;
     UnityEngine.UI.Image background;
@@ -28,18 +28,15 @@ public class TooltipController : MonoBehaviour
     public void SetText(string tooltipText)
     {
         text.text = tooltipText;
-        Vector2 backgroundSize = new Vector2(
+        Vector2 messageBoxSize = new Vector2(
             text.preferredWidth + 2 * textPaddingSize, 30);
-        //GetComponent<RectTransform>().sizeDelta = backgroundSize;
-        background.rectTransform.sizeDelta = backgroundSize;
-        text.rectTransform.sizeDelta = backgroundSize;
+        GetComponent<RectTransform>().sizeDelta = messageBoxSize;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        text = GetComponentInChildren<UnityEngine.UI.Text>();
-        background = GetComponentInChildren<UnityEngine.UI.Image>();
+        text = transform.Find("Text").gameObject.GetComponent<UnityEngine.UI.Text>();
+        background = transform.Find("Background").gameObject.GetComponent<UnityEngine.UI.Image>();
         Hide();
     }
 }

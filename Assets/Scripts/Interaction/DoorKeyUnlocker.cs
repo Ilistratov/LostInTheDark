@@ -8,8 +8,7 @@ public class DoorKeyUnlocker : GenericInteraction
     private bool interaction_available = false;
     private DoorInteractor linked_door;
     private Collider2D collided_body;
-    public override bool IsProvideRequired() { return interaction_available && !linked_door.is_open; }
-    public override bool IsRevokeRequired() { return !interaction_available || linked_door.is_open; }
+    public override bool IsActionAvailable() { return interaction_available && !linked_door.is_open; }
     public override void Interact()
     {
         var item_slot = collided_body.GetComponent<ItemSlot>();
@@ -19,15 +18,17 @@ public class DoorKeyUnlocker : GenericInteraction
         }
         else
         {
-            Debug.Log("Couldn't find a key in your Item Slot");
-            ShowMessage("Couldn't find a key in your Item Slot");
-            StartCoroutine("HideMessage");
-
+            MessageBoxController.Message message = new MessageBoxController.Message(
+                string.Format("You need {0} to open that door", unlocker_tag),
+                3);
+            MessageBoxController controller = GameObject.FindGameObjectWithTag("Message Display")
+                                              .GetComponent<MessageBoxController>();
+            controller.EnqueueMessage(message);
         }
     }
-    public override string GetInteractionUIString()
+    public override string GetUIString()
     {
-        return string.Format("Unlock the door");
+        return string.Format("Unlock door to {0}", linked_door.GetComponent<DoorInteractor>().GetDestinationRoomName());
     }
     // Start is called before the first frame update
     public override void Start()
@@ -54,20 +55,5 @@ public class DoorKeyUnlocker : GenericInteraction
             interaction_available = false;
             collided_body = null;
         }
-    }
-    private void ShowMessage(string message)
-    {
-        GameObject tooltip = GameObject.FindGameObjectWithTag("Message Display");
-        TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
-        tooltipController.SetText(message);
-        tooltipController.Show();
-    }
-    private IEnumerator HideMessage()
-    {
-        yield return new WaitForSeconds(5); // waiting for 5 sec and then hiding the message
-        GameObject tooltip = GameObject.FindGameObjectWithTag("Message Display");
-        TooltipController tooltipController = tooltip.GetComponent<TooltipController>();
-        tooltipController.Hide();
-        tooltipController.SetText("");
     }
 }

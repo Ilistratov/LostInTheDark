@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd85b981dcccc864db72186d47631dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectorDisplayPrefab: {fileID: 2914877275807091414, guid: ac8b552575116f44793e95fb0f122fd1, type: 3}
   mItemName: Lantern
 --- !u!61 &6769274870286233370
 BoxCollider2D:

@@ -16,7 +16,7 @@ public class PickUpComponent : GenericInteraction
         collectAvailable = false;
     }
 
-    public override string GetInteractionUIString()
+    public override string GetUIString()
     {
         return string.Format("Pick up {0}", mItemName);
     }
@@ -49,13 +49,8 @@ public class PickUpComponent : GenericInteraction
         }
     }
 
-    public override bool IsProvideRequired()
+    public override bool IsActionAvailable()
     {
         return collectAvailable;
-    }
-
-    public override bool IsRevokeRequired()
-    {
-        return !collectAvailable;
     }
 }

@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734d70f2636c4934d85b5130a69f9228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  madnessDrainSpeed: 0
+  sanityChangeSpeed: 0
 --- !u!114 &1717061528380706461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda74daa7867dee43be1cdec2b1a08ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectorDisplayPrefab: {fileID: 3683087814638280766, guid: bff92d137662f0148bbe236c0fdc4c6e, type: 3}
 --- !u!1 &9218914868662138163
 GameObject:
   m_ObjectHideFlags: 0

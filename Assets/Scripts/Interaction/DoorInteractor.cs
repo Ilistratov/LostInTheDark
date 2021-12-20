@@ -10,8 +10,7 @@ public class DoorInteractor : GenericInteraction
     private bool interaction_available = false;
     private Collider2D collided_body;
 
-    public override bool IsProvideRequired() { return interaction_available && is_open; }
-    public override bool IsRevokeRequired() { return !interaction_available || !is_open; }
+    public override bool IsActionAvailable() { return interaction_available && is_open; }
     public override void Interact()
     {
         if (is_open)
@@ -20,15 +19,28 @@ public class DoorInteractor : GenericInteraction
             collided_body.transform.SetPositionAndRotation(
                 other_side.transform.position + other_side.entry_position_shift, collided_body.transform.rotation);
         }
+    }
+
+    public string GetCurrentRoomName()
+    {
+        return transform.parent.gameObject.name;
+    }
+
+    public string GetDestinationRoomName()
+    {
+        if (other_side)
+        {
+            return other_side.GetComponent<DoorInteractor>().GetCurrentRoomName();
+        }
         else
         {
-            Debug.Log("Attempted to go through closed door");
+            return "???";
         }
     }
 
-    public override string GetInteractionUIString()
+    public override string GetUIString()
     {
-        return string.Format("Open the door");
+        return string.Format("Go to {0}", GetDestinationRoomName());
     }
 
     // Collision with player start
@@ -36,7 +48,6 @@ public class DoorInteractor : GenericInteraction
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player approached the door");
             interaction_available = true;
             collided_body = collision;
         }
@@ -47,10 +58,8 @@ public class DoorInteractor : GenericInteraction
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player left the door");
             interaction_available = false;
             collided_body = null;
         }
     }
-
 }
