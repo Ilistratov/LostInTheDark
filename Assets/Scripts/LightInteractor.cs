@@ -58,9 +58,10 @@ public class LightInteractor : MonoBehaviour
                 return;
             }
         }
-        float rad = source.GetComponent<CircleCollider2D>().radius;
-        lightLevel += 1 - (distance * distance) / (rad * rad);
-        lightLevel = Mathf.Min(1, lightLevel);
-        lightLevel = Mathf.Max(0, lightLevel);
+        float radius = source.GetComponent<CircleCollider2D>().radius;
+        float distanceRatio = distance / radius;
+        distanceRatio = Mathf.Clamp01(distanceRatio);
+        lightLevel += 1 - distanceRatio * distanceRatio;
+        lightLevel = Mathf.Clamp01(lightLevel);
     }
 }

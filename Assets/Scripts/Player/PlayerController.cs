@@ -4,39 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Set the Player's speed
-    private float speed = 1.5f;
+    public float moveSpeed = 3f;
+    private Vector2 moveDirection;
     private PlayerInteractor mPlayerInteractor;
 
-    void SetFlip(float horizontalInput)
+    void SetFlip()
     {
-        if (horizontalInput < 0)
+        if (moveDirection.x < 0)
         {
             gameObject.GetComponentInChildren<SpriteRenderer>().flipX = false;
         }
-        else if (horizontalInput > 0)
+        else if (moveDirection.x > 0)
         {
             gameObject.GetComponentInChildren<SpriteRenderer>().flipX = true;
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
+        moveDirection = new Vector2(0, 0);
         mPlayerInteractor = GetComponent<PlayerInteractor>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Get horizontal and vertical input
-        float verticalInput = Input.GetAxis("Vertical");
-        float horizontalInput = Input.GetAxis("Horizontal");
-        SetFlip(horizontalInput);
-
-        // Move player to a certain direction
-        Vector2 direction = new Vector2(horizontalInput, verticalInput);
-        transform.Translate(direction * speed * Time.deltaTime);
+        moveDirection.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        moveDirection.Normalize();
+        SetFlip();
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -46,5 +40,11 @@ public class PlayerController : MonoBehaviour
         {
             mPlayerInteractor.SelectNextInteraction();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        var rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.MovePosition(rigidbody.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
     }
 }

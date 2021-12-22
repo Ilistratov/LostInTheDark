@@ -50,6 +50,7 @@ public class DoorInteractor : GenericInteraction
         {
             interaction_available = true;
             collided_body = collision;
+            transform.Find("Door Light").GetComponent<LightSourceController>().Enable();
         }
     }
 
