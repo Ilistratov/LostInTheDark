@@ -3197,6 +3197,10 @@ PrefabInstance:
       propertyPath: madnessDrainSpeed
       value: 250
       objectReference: {fileID: 0}
+    - target: {fileID: 5661444654745432773, guid: 958bbc09eca1e9b4a9feccbde8fc5e52, type: 3}
+      propertyPath: sanityChangeSpeed
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 9204219323364918544, guid: 958bbc09eca1e9b4a9feccbde8fc5e52, type: 3}
       propertyPath: m_SortingOrder
       value: 2
