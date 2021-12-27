@@ -23,6 +23,7 @@ public class SelectorController : MonoBehaviour
         selectorSprite.color = selectedColor;
         var text = hoverText.GetComponent<UnityEngine.UI.Text>();
         text.text = uiString;
+        UpdateTextPosition();
         text.enabled = true;
         needUpdateTextPosition = true;
     }
@@ -57,7 +58,7 @@ public class SelectorController : MonoBehaviour
         text.transform.position = text.canvas.transform.TransformPoint(uiPosition);
     }
     
-    void Update()
+    void FixedUpdate()
     {
         if (needUpdateTextPosition)
         {
